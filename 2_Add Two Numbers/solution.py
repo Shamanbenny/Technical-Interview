@@ -1,3 +1,8 @@
+# Solution Info
+# Runtime: 53 ms, faster than 68.09% of Python3 submissions.
+# Memory: 16.62 MB, less than 41.20% of Python3 submissions.
+
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):

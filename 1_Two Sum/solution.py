@@ -1,3 +1,6 @@
+# Solution Info
+# Runtime: 53 ms, faster than 87.18% of Python3 submissions.
+# Memory: 17.34 MB, less than 81.24% of Python3 submissions.
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         sortedNums = nums[:]

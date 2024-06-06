@@ -1,3 +1,6 @@
+# Solution Info
+# Runtime: 51 ms, faster than 76.11% of Python3 submissions.
+# Memory: 16.51 MB, less than 91.15% of Python3 submissions.
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         max_len = 0
