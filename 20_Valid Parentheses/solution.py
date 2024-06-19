@@ -1,4 +1,4 @@
-# Solution Info (One Pass solution using buffers)
+# Solution Info (Stack Approach):
 # Runtime: 28 ms, faster than 92.49% of Python3 submissions.
 # Memory: 16.42 MB, less than 91.09% of Python3 submissions.
 class Solution:
