@@ -29,38 +29,39 @@ Explanation:
 
 In this example, the array size is 5, the total sum cannot exceed 15, and we want to find the maximum value that can be placed at index 3. The valid array that satisfies all constraints might look like [3, 4, 4, 3, 2], with a total sum of 15. Hence, the value at index 3 is 4, which is the maximum possible value under the given conditions.
 """
+# Complete the 'maxSum' function below.
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER max
+#  3. INTEGER k
 def maxSum(n, max, k):
-    # Function to check if a given value for arr[k-1] is valid
-    def is_valid(mid):
-        total_sum = 0
-        
-        # Fill the array in a way that the sum doesn't exceed max
-        # From 0 to k-1 (inclusive), values are decreasing towards arr[k-1]
-        for i in range(k-1, -1, -1):
-            total_sum += mid - (k-1-i)  # Decreasing to maintain the difference constraint
-            if total_sum > max:  # If we exceed max at any point, it's not valid
-                return False
+    # Write your code here
+    assert 1 <= k <= n <= max <= 1000000000
+    
+    def check(x):
+        def summ(k):
+            return (k*(k+1))//2
 
-        # From k to n-1 (inclusive), values are increasing from arr[k-1]
-        for i in range(k, n):
-            total_sum += mid + (i-k)  # Increasing to maintain the difference constraint
-            if total_sum > max:  # If we exceed max at any point, it's not valid
-                return False
+        def sumx(k):
+            if x <= k:
+                sum1 = summ(x) + k - x
+            else:
+                sum1 = summ(x) - summ(x - k)
+            return sum1
         
-        return total_sum <= max
+        ans = sumx(k) + sumx(n - k + 1) - x
+        return ans <= max
     
-    # Binary search for the maximum valid value for arr[k-1]
-    left, right = 0, max
-    result = 0
-    while left <= right:
-        mid = (left + right) // 2
-        if is_valid(mid):
-            result = mid  # This value is valid, try for a larger one
-            left = mid + 1
+    lo = 1
+    hi = max + 1
+    while hi - lo > 1:
+        mid = (hi + lo)//2
+        if check(mid):
+            lo = mid
         else:
-            right = mid - 1
-    
-    return result
+            hi = mid
+    return lo
 
 n = 4
 max = 4
