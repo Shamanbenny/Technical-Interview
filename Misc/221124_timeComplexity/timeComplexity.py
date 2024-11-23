@@ -15,3 +15,8 @@ def func_g(n1: int, n2: int):
 
 func_f(16)
 func_f(32)
+
+# Time Complexity: O((2^log(n))(n)) ~= O(n^2)
+# Using Rule of Exponents: a^(log_a(n)) = n
+# 2^log(n) = derived from the number of times the function is called
+# [Aka the number of nodes in the recursion tree]
