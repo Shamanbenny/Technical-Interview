@@ -7,6 +7,7 @@ import unicodedata
 import glob
 
 import torch
+import random
 
 # Contains small and capital letters, space, period, comma, semicolon, and apostrophe
 POSSIBLE_LETTERS = string.ascii_letters + " .,;'"
@@ -56,6 +57,19 @@ def line_to_tensor(line):
         letter_index = POSSIBLE_LETTERS.find(letter)
         tensor[l_idx][0][letter_index] = 1
     return tensor
+
+# Randomly selects a category and a line from that category
+def random_training_example(category_lines, all_categories):
+    
+    def random_choice(a):
+        random_idx = random.randint(0, len(a) - 1)
+        return a[random_idx]
+    
+    category = random_choice(all_categories)
+    line = random_choice(category_lines[category])
+    category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
+    line_tensor = line_to_tensor(line)
+    return category, line, category_tensor, line_tensor
 
 if __name__ == '__main__':
     print(POSSIBLE_LETTERS)
