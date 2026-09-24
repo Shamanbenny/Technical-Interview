@@ -1,2 +1,6 @@
 __pycache__/
-**/.env
+
+# Local secrets and environment files.
+.env
+.env.*
+!.env.example

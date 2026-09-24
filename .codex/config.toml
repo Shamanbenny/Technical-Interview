@@ -1,0 +1,3 @@
+[mcp_servers.leetcode]
+command = "python3"
+args = [".codex/leetcode_mcp/server.py"]

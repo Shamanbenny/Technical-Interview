@@ -1,0 +1,4 @@
+interface:
+  display_name: Sync LeetCode
+  short_description: Import solved LeetCode submissions into this repository.
+  default_prompt: Sync my accepted LeetCode submissions into the repository's LeetCode folder.
