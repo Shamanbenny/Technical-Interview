@@ -61,7 +61,26 @@ def graphql(query: str, variables: dict[str, Any]) -> dict[str, Any]:
         with urllib.request.urlopen(request, timeout=30) as response:
             payload = json.loads(response.read().decode())
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"LeetCode returned HTTP {exc.code}") from exc
+        # LeetCode often returns useful GraphQL validation details in the
+        # response body for HTTP 400. Preserve that detail without logging
+        # request headers or any credential material.
+        response_body = exc.read().decode("utf-8", errors="replace").strip()
+        detail = response_body
+        try:
+            error_payload = json.loads(response_body)
+            messages = [
+                str(error.get("message", "GraphQL error"))
+                for error in error_payload.get("errors", [])
+                if isinstance(error, dict)
+            ]
+            if messages:
+                detail = "; ".join(messages)
+        except (json.JSONDecodeError, AttributeError):
+            pass
+        if len(detail) > 500:
+            detail = detail[:500] + "..."
+        suffix = f": {detail}" if detail else ""
+        raise RuntimeError(f"LeetCode returned HTTP {exc.code}{suffix}") from exc
     except urllib.error.URLError as exc:
         raise RuntimeError(f"Could not reach LeetCode: {exc.reason}") from exc
 
@@ -76,7 +95,7 @@ def get_problem(title_slug: str) -> dict[str, Any]:
       question(titleSlug: $titleSlug) {
         questionId questionFrontendId title titleSlug content difficulty
         isPaidOnly topicTags { name slug }
-        constraints exampleTestcases
+        exampleTestcases
         codeSnippets { lang langSlug code }
       }
     }
@@ -140,7 +159,7 @@ def get_submission_code(submission_id: str) -> dict[str, Any]:
     query = """
     query submissionDetails($submissionId: Int!) {
       submissionDetails(submissionId: $submissionId) {
-        id code lang runtime memory statusDisplay timestamp
+        id code lang { name } runtime memory statusDisplay timestamp
         question { title titleSlug questionFrontendId }
       }
     }
