@@ -44,4 +44,3 @@ Canonical URL: https://leetcode.com/problems/length-of-last-word/
 	<li>There will be at least one word in <code>s</code>.</li>
 </ul>
 
-

@@ -38,4 +38,3 @@ Canonical URL: https://leetcode.com/problems/to-lower-case/
 	<li><code>s</code> consists of printable ASCII characters.</li>
 </ul>
 
-
