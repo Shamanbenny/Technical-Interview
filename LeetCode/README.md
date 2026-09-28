@@ -20,6 +20,8 @@ This repository includes a repo-local `sync-leetcode` skill and MCP server. In C
 
 The skill finds accepted submissions and creates missing problem folders under `LeetCode/`, including the problem README and submitted source code. Existing files are not overwritten.
 
+Syncs use `LeetCode/.leetcode_sync.json` as a checkpoint owned by the repo-local MCP server. The MCP checks the newest submission first and only paginates into older submissions when new activity is present. The skill commits the checkpoint only after repository writes succeed. Existing folders are matched by their numeric problem ID prefix, so title changes do not create duplicates.
+
 ### One-time setup
 
 1. Copy the example environment file from the repository root:
