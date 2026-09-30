@@ -1,0 +1,17 @@
+# Odd Even Linked List
+
+Given the `head` of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return the reordered list. The first node is odd and the second is even. Preserve the relative order inside both groups. Solve in `O(1)` extra space and `O(n)` time.
+
+### Examples
+
+- Input: `head = [1,2,3,4,5]`; Output: `[1,3,5,2,4]`
+- Input: `head = [2,1,3,5,6,4,7]`; Output: `[2,3,6,7,1,5,4]`
+
+### Constraints
+
+- The number of nodes is in `[0, 10^4]`.
+- `-10^6 <= Node.val <= 10^6`
+
+Difficulty: Medium  
+Topics: Linked List  
+URL: https://leetcode.com/problems/odd-even-linked-list/
